@@ -1,7 +1,24 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
+##################################################################################################
+#   NOTE Docstrings were AI generated to provide ample context for each optimization. Corresponding "play" was 
+#   hand made and done without the intervention of AI
+##################################################################################################
+
 def Guess_And_Check():
+    """Coarse grid search for the max of the 1-D toy parabola y = 4 - (x - 2)^2.
+
+    Evaluates the function on the hand-picked nodes
+    x = 0, 0.5, ..., 5, stores the y values, then reports
+    max(y) and the x that produced it.
+
+    Notes
+    -----
+    Not an optimizer: just sample-and-pick. The true vertex is at
+    x = 2, y = 4, which happens to land on a grid point here.
+    Contrast with ``Plotting`` (dense curve) and the derivative methods.
+    """
     # Vector for the X value
     x = [0,0.5,1,1.5,2,2.5,3,3.5,4,4.5,5]
 
@@ -17,7 +34,18 @@ def Guess_And_Check():
     print(f"Max Y value is {max(y)}")
     print(f"Max Y at X value of {x[y.index(max(y))]}")
 
+
 def Plotting():
+    """Draw the same parabola y = 4 - (x - 2)^2 on a dense 1-D grid.
+
+    Samples x on [0, 4] with 100 linspace points and plots the curve
+    so the vertex at (2, 4) is visible. No search is performed.
+
+    Notes
+    -----
+    Same surface as ``Guess_And_Check``, different resolution.
+    Useful as a visual check before running ascent / bisection / Newton.
+    """
     x = np.linspace(0, 4, 100)
     y = []
 
@@ -31,8 +59,20 @@ def Plotting():
     plt.plot(x,y)
     plt.show()
 
-def Gradient_opt():
 
+def Gradient_opt():
+    """Fixed-step gradient *ascent* on y = 4 - (x - 2)^2.
+
+    Uses the exact derivative
+        y'(x) = -2x + 4
+    starting at x = 0 with α = 0.1 for 20 iterations. The update is
+    x ← x + α y'(x) because the goal is a *maximum*, not a minimum.
+
+    Notes
+    -----
+    First-order method. The critical point is x = 2. Step size is
+    hand-chosen; compare speed and overshoot with bisection and Newton.
+    """
     # Derivative
     def df(x):
         return (-2 * x) + 4
@@ -48,7 +88,20 @@ def Gradient_opt():
         x = x + alpha * grad
         print(f"Step {epoch}: x = {x:.4f}")
 
+
 def Bisection():
+    """Bisection on y'(x) = -2x + 4 to isolate the critical point of the parabola.
+
+    Brackets the root of the first derivative on [0, 3], then repeatedly
+    replaces the endpoint whose derivative has the same sign as the midpoint.
+    Stops when |y'(c)| < 1e-5 or after 20 steps.
+
+    Notes
+    -----
+    This is root-finding on the derivative, not interval-halving on y itself.
+    Sign test assumes a single root in [a, b] (true here: y' is linear).
+    Prints the midpoint each iteration.
+    """
     # Derivative f'(x) = -2x + 4
     def df(x):
         return -2 * x + 4
@@ -69,6 +122,7 @@ def Bisection():
             b = c # Root is in [a, c], Same for here ^^^^^^
         print(f"Step {step}: c = {c:.4f}")
 
+
 """
 ================================================================================
 NEWTON'S METHOD FOR OPTIMIZATION - PLAY AND EXPLORE SESSION
@@ -86,7 +140,33 @@ Properties:
 ================================================================================
 """
 
+
 def newtons_optimization():
+    """Newton iteration on f'/f'' for a menu of 1-D test surfaces.
+
+    Several (f', f'') pairs are defined (cubic, quartic double-well,
+    damped sine, rational bump, log-polynomial). The loop below
+    currently uses the log-polynomial
+        f(x) = x^2 - ln(x)   (x > 0)
+    with
+        f'(x) = 2x - 1/x,    f''(x) = 2 + 1/x^2.
+    Starts at x = 1, updates
+        x ← x - f'(x)/f''(x)
+    and stops when the step is smaller than 1e-5 or after 20 iterations.
+
+    Returns
+    -------
+    float
+        Last iterate (the reported critical point on success).
+
+    Notes
+    -----
+    Inner derivatives were generated as a surface-variation set.
+    Swap ``df_log`` / ``ddf_log`` for another pair to change the
+    landscape without rewriting the Newton loop. Domain matters:
+    log and 1/x blow up at x ≤ 0; the rational and wave examples
+    have multiple critical points, so the start x_n picks which one.
+    """
     import math
     # Gemini Generated Functions to test each type of equation
     # ==============================================================================
@@ -168,4 +248,22 @@ def newtons_optimization():
 
     return x_n
 
+
 newtons_optimization()
+
+
+##################################################################################################
+#    TAKEHOME NOTES AFTER PLAY SESSION                                                           #
+##################################################################################################
+
+"""
+    * Gradient 
+        - Extremely sensitive to the learning rate, this is interesting after having tried many
+        different equations as I'm unsure why you wouldn't just increase the learning rate to reach
+        the optimum point earlier. I was unable to find an equation that increasing the learning
+        rate had falsified the outcome or reduced the meaning of the outcome.
+            = After further looking into equations, this learning rate, when too large, can jump completely 
+            over the maximum which can impact the final product, seeming like it's unfinished at certain points.
+        - I can see why the gradient method is using a lot in machine learning, it's one of the simplest and it's efficient 
+        at what it does. I wonder how different algorithms, like newtons, and bisection would do in a machine learning space. 
+        I'd imagine there are different applications for each of them, some may excel in areas better than others.
