@@ -1,15 +1,32 @@
+"""
+================================================================================
+CLASSIC 2-D OPTIMIZATION METHODS
+================================================================================
+Toy function used throughout:
+
+    f(x, y) = (x - 2)^2 - xy + (y - 3)^2
+
+    grad f  = (2x - y - 4,  -x + 2y - 6)
+    H       = [[2, -1], [-1, 2]]
+    minimum at (14/3, 16/3) ≈ (4.667, 5.333)
+
+Methods
+-------
+    vizualization()           3-D surface plot of f
+    Bisection_Nelder_Mead()   SciPy Nelder-Mead simplex (derivative-free)
+    Gradient_2D()             Fixed-step gradient descent
+    Newtons_2D()              Newton's method with the analytic Hessian
+
+NOTE: Docstrings were AI generated to provide ample context for each
+optimization. Corresponding "play" was hand made and done without the
+intervention of AI.
+================================================================================
+"""
+
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.optimize import minimize
 
-##################################################################################################
-#   NOTE Docstrings were AI generated to provide ample context for each optimization. Corresponding "play" was 
-#   hand made and done without the intervention of AI
-##################################################################################################
-
-# Toy Function # # # # # # # # # # # #
-# f(x,y) = (x-2)**2 - xy + (y-3)**2
-#  # # # # # # # # # # # # # # # # # #
 
 
 def vizualization():
@@ -28,7 +45,7 @@ def vizualization():
     """
     def f(coords):
         x, y = coords
-        output = (x-2)**2 - x*y + (y-3)**2
+        output = (x - 2)**2 - x*y + (y - 3)**2
         return output
 
     # Visualizing f(x)
@@ -40,7 +57,7 @@ def vizualization():
 
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
-    ax.plot_surface(X,Y,Z, cmap='viridis')
+    ax.plot_surface(X, Y, Z, cmap='viridis')
     ax.set_xlabel('X')
     ax.set_ylabel('Y')
 
@@ -71,7 +88,6 @@ def Bisection_Nelder_Mead():
 
     # Initial guess (starting simplex vertex)
     x0 = np.array([0.0, 0.0])
-
 
     # Execute Nelder-Mead optimization
     res = minimize(f, x0, method='Nelder-Mead')
@@ -106,9 +122,8 @@ def Gradient_2D():
     v = np.array([0.0, 0.0]) # Initial guess
     alpha = 0.5              # Learning rate
     epochs = 20              # Iterations
-    
-    # 2D Gradient Descent Loop
 
+    # 2D Gradient Descent Loop
     for epoch in range(epochs):
         grad = grad_f(v)
         v = v - alpha * grad
@@ -132,13 +147,13 @@ def Newtons_2D():
     # Define Gradient & Hessian
     def grad(xy):
         x, y = xy[0], xy[1]
-        return np.array([2*(x-2) - y, -x + 2*(y-3)])
+        return np.array([2*(x - 2) - y, -x + 2*(y - 3)])
+
     def hessian(xy):
         return np.array([[2.0, -1.0], [-1.0, 2.0]])
 
     # Iteration Step
     xy = np.array([0.0, 0.0])
-
     for _ in range(5):
         g = grad(xy)
         H = hessian(xy)
@@ -146,14 +161,20 @@ def Newtons_2D():
     print(xy)
 
 
-#Bisection_Nelder_Mead()
-#Gradient_2D()
-Newtons_2D()
+# ==============================================================================
+# RUN
+# ==============================================================================
 
-##################################################################################################
-#    TAKEHOME NOTES AFTER PLAY SESSION                                                           #
-##################################################################################################
+if __name__ == "__main__":
+    # vizualization()
+    # Bisection_Nelder_Mead()
+    # Gradient_2D()
+    Newtons_2D()
 
+
+# ==============================================================================
+# TAKEHOME NOTES AFTER PLAY SESSION
+# ==============================================================================
+"""
 
 """
-    
