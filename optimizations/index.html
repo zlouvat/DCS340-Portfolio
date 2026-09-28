@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Optimizations</title>
+  <meta name="description" content="Classic optimization methods explored in 1-D and 2-D.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <script>
+    try {
+      var saved = localStorage.getItem("theme");
+      if (saved) document.documentElement.setAttribute("data-theme", saved);
+    } catch (e) {}
+  </script>
+</head>
+<body>
+  <div class="topbar">
+    <div class="wrap">
+      <nav class="pill-nav">
+        <a href="../">Home</a>
+        <a href="../#projects">Projects</a>
+        <a class="active" href="../optimizations/">Optimizations</a>
+        <a class="gh" href="https://github.com/zlouvat">GitHub</a>
+      </nav>
+      <button class="theme-btn" id="theme-btn" aria-label="Toggle dark mode">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <main class="wrap" id="top">
+    <div class="hero">
+      <div>
+        <p class="eyebrow">DCS340 Portfolio</p>
+        <h1>Classic <span>Optimization</span> Methods</h1>
+        <p class="sub">Building each method from scratch and watching how it finds the top of a curve or the bottom of a surface.</p>
+        <div class="btns">
+          <a class="btn primary" href="#one-d">Explore Methods</a>
+          <a class="btn ghost" href="https://github.com/zlouvat/Optimizations-Portfolio">View on GitHub</a>
+        </div>
+        <nav class="subnav">
+          <a href="#one-d">1-D Methods</a>
+          <a href="#two-d">2-D Methods</a>
+          <a href="#notes">Notes</a>
+          <a href="#running">Run the Code</a>
+        </nav>
+      </div>
+
+      <div class="panel">
+        <div class="plot">
+          <svg viewBox="0 0 300 300" role="img" aria-label="Contour plot of f(x, y) = (x - 2)^2 - xy + (y - 3)^2 with gradient descent and Newton paths from (0, 0) to the minimum">
+            <g fill="none" stroke="var(--contour)" stroke-width="1.2" transform="rotate(-45 160 138.2)">
+              <ellipse cx="160" cy="138.2" rx="27.3" ry="15.7"/>
+              <ellipse cx="160" cy="138.2" rx="54.5" ry="31.5"/>
+              <ellipse cx="160" cy="138.2" rx="86.2" ry="49.8"/>
+              <ellipse cx="160" cy="138.2" rx="115.7" ry="66.8"/>
+              <ellipse cx="160" cy="138.2" rx="144.3" ry="83.3"/>
+              <ellipse cx="160" cy="138.2" rx="194.1" ry="112.1"/>
+            </g>
+            <line x1="32.7" y1="283.6" x2="160" y2="138.2" stroke="var(--accent)" stroke-width="2" stroke-dasharray="5 5"/>
+            <polyline fill="none" stroke="var(--path)" stroke-width="2.2" stroke-linejoin="round"
+              points="32.7,283.6 87.3,201.8 128.2,174.5 141.8,154.1 152.0,147.3 155.5,142.2 158.0,140.5 158.9,139.2 159.5,138.8 160,138.2"/>
+            <g fill="var(--path)">
+              <circle cx="87.3" cy="201.8" r="3.2"/>
+              <circle cx="128.2" cy="174.5" r="3.2"/>
+              <circle cx="141.8" cy="154.1" r="3.2"/>
+              <circle cx="152.0" cy="147.3" r="3.2"/>
+              <circle cx="155.5" cy="142.2" r="3.2"/>
+            </g>
+            <circle cx="32.7" cy="283.6" r="4.5" fill="var(--text)"/>
+            <circle cx="160" cy="138.2" r="6" fill="var(--surface)" stroke="var(--accent)" stroke-width="2.5"/>
+            <text x="42" y="287" font-family="JetBrains Mono, monospace" font-size="10" fill="var(--muted)">start (0, 0)</text>
+            <text x="172" y="128" font-family="JetBrains Mono, monospace" font-size="10" fill="var(--muted)">min (4.67, 5.33)</text>
+          </svg>
+        </div>
+        <div class="legend">
+          <span><i style="background: var(--path)"></i>Gradient descent, α = 0.5</span>
+          <span><i style="background: var(--accent)"></i>Newton's method, 1 step</span>
+        </div>
+        <div class="stats">
+          <div class="stat"><b>9</b><span>Methods</span></div>
+          <div class="stat"><b>2</b><span>Dimensions</span></div>
+          <div class="stat"><b>5</b><span>Test functions</span></div>
+        </div>
+      </div>
+    </div>
+
+    <section id="one-d">
+      <div class="section-head">
+        <h2>1-D Methods</h2>
+        <p>Finding the maximum of a single-variable function.</p>
+        <div class="fn">f(x) = <code>4 − (x − 2)²</code> · max at <code>x = 2</code></div>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <span class="num">01</span>
+          <h3>Guess &amp; Check</h3>
+          <p class="tag"><code>Guess_And_Check()</code></p>
+          <p>Evaluate f on a coarse grid and pick the largest value.</p>
+        </div>
+        <div class="card">
+          <span class="num">02</span>
+          <h3>Plotting</h3>
+          <p class="tag"><code>Plotting()</code></p>
+          <p>Plot f on [0, 4] to see the peak before searching for it.</p>
+        </div>
+        <div class="card">
+          <span class="num">03</span>
+          <h3>Gradient Ascent</h3>
+          <p class="tag"><code>Gradient_opt()</code></p>
+          <p>Step uphill with <code>x ← x + α·f′(x)</code> using a fixed learning rate.</p>
+        </div>
+        <div class="card">
+          <span class="num">04</span>
+          <h3>Bisection</h3>
+          <p class="tag"><code>Bisection()</code></p>
+          <p>Halve a bracket around the root of <code>f′(x)</code> until it's within tolerance.</p>
+        </div>
+        <div class="card">
+          <span class="num">05</span>
+          <h3>Newton's Method</h3>
+          <p class="tag"><code>newtons_optimization()</code></p>
+          <p><code>xₙ₊₁ = xₙ − f′(xₙ) / f″(xₙ)</code>, tested on cubic, quartic, damped-wave, rational, and log functions.</p>
+        </div>
+      </div>
+      <a class="file-link" href="https://github.com/zlouvat/Optimizations-Portfolio/blob/main/classic_optimization.py">View classic_optimization.py →</a>
+    </section>
+
+    <section id="two-d">
+      <div class="section-head">
+        <h2>2-D Methods</h2>
+        <p>Finding the minimum of a two-variable surface.</p>
+        <div class="fn">f(x, y) = <code>(x − 2)² − xy + (y − 3)²</code> · min at <code>(14/3, 16/3)</code></div>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <span class="num">01</span>
+          <h3>Surface Visualization</h3>
+          <p class="tag"><code>vizualization()</code></p>
+          <p>3-D surface plot of f to see the bowl shape.</p>
+        </div>
+        <div class="card">
+          <span class="num">02</span>
+          <h3>Nelder-Mead</h3>
+          <p class="tag"><code>Bisection_Nelder_Mead()</code></p>
+          <p>SciPy's derivative-free simplex search, used as a baseline.</p>
+        </div>
+        <div class="card">
+          <span class="num">03</span>
+          <h3>Gradient Descent</h3>
+          <p class="tag"><code>Gradient_2D()</code></p>
+          <p>Step downhill with <code>v ← v − α·∇f(v)</code>.</p>
+        </div>
+        <div class="card">
+          <span class="num">04</span>
+          <h3>Newton's Method</h3>
+          <p class="tag"><code>Newtons_2D()</code></p>
+          <p>Solve <code>HΔ = ∇f</code> each step, which is exact in one step for a quadratic.</p>
+        </div>
+      </div>
+      <a class="file-link" href="https://github.com/zlouvat/Optimizations-Portfolio/blob/main/2D-Optimizations.py">View 2D-Optimizations.py →</a>
+    </section>
+
+    <section id="notes">
+      <div class="section-head">
+        <h2>Takehome Notes</h2>
+        <p>Reflections after each play session.</p>
+      </div>
+      <div class="panel notes">
+        <h3>Gradient</h3>
+        <ul>
+          <li>Extremely sensitive to the learning rate, this is interesting after having tried many different equations as I'm unsure why you wouldn't just increase the learning rate to reach the optimum point earlier. I was unable to find an equation that increasing the learning rate had falsified the outcome or reduced the meaning of the outcome.
+            <ul>
+              <li>After further looking into equations, this learning rate, when too large, can jump completely over the maximum which can impact the final product, seeming like it's unfinished at certain points.</li>
+            </ul>
+          </li>
+          <li>I can see why the gradient method is using a lot in machine learning, it's one of the simplest and it's efficient at what it does. I wonder how different algorithms, like newtons, and bisection would do in a machine learning space. I'd imagine there are different applications for each of them, some may excel in areas better than others.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="running">
+      <div class="section-head">
+        <h2>Running the Code</h2>
+        <p>Python 3 with NumPy, Matplotlib, and SciPy.</p>
+      </div>
+      <div class="panel run">
+        <pre><code>git clone https://github.com/zlouvat/Optimizations-Portfolio.git
+cd Optimizations-Portfolio
+pip install numpy matplotlib scipy
+
+python classic_optimization.py
+python 2D-Optimizations.py</code></pre>
+        <p>Each script runs one method by default. To try a different one, uncomment its call in the <code>if __name__ == "__main__":</code> block at the bottom of the file.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      DCS340 · Introduction to Classical Methods in Optimization · <a href="https://github.com/zlouvat/Optimizations-Portfolio">Source on GitHub</a>
+    </div>
+  </footer>
+
+  <script src="../theme.js"></script>
+</body>
+</html>

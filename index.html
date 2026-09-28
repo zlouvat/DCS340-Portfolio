@@ -3,309 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DCS340 Portfolio</title>
-  <meta name="description" content="Classic optimization methods explored in 1-D and 2-D.">
+  <title>Zack's Portfolio</title>
+  <meta name="description" content="Projects and coursework by Zack.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
   <script>
     try {
       var saved = localStorage.getItem("theme");
       if (saved) document.documentElement.setAttribute("data-theme", saved);
     } catch (e) {}
   </script>
-  <style>
-    :root {
-      --bg: #f2f4f8;
-      --grid: rgba(20, 33, 61, 0.06);
-      --surface: #ffffff;
-      --surface-2: #e9edf5;
-      --text: #14213d;
-      --muted: #5b6784;
-      --border: #d5dcea;
-      --accent: #2b59c3;
-      --accent-ink: #ffffff;
-      --accent-soft: rgba(43, 89, 195, 0.1);
-      --path: #e07a2f;
-      --contour: rgba(43, 89, 195, 0.35);
-      --shadow: 0 10px 30px rgba(20, 33, 61, 0.08);
-    }
-    :root[data-theme="dark"] {
-      --bg: #0e131c;
-      --grid: rgba(231, 235, 243, 0.05);
-      --surface: #161d2a;
-      --surface-2: #1d2636;
-      --text: #e7ebf3;
-      --muted: #97a3bd;
-      --border: #2a3448;
-      --accent: #7ea2ff;
-      --accent-ink: #0e131c;
-      --accent-soft: rgba(126, 162, 255, 0.12);
-      --path: #f29a55;
-      --contour: rgba(126, 162, 255, 0.35);
-      --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-    }
-    @media (prefers-color-scheme: dark) {
-      :root:not([data-theme="light"]) {
-        --bg: #0e131c;
-        --grid: rgba(231, 235, 243, 0.05);
-        --surface: #161d2a;
-        --surface-2: #1d2636;
-        --text: #e7ebf3;
-        --muted: #97a3bd;
-        --border: #2a3448;
-        --accent: #7ea2ff;
-        --accent-ink: #0e131c;
-        --accent-soft: rgba(126, 162, 255, 0.12);
-        --path: #f29a55;
-        --contour: rgba(126, 162, 255, 0.35);
-        --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-      }
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      background-color: var(--bg);
-      background-image:
-        linear-gradient(var(--grid) 1px, transparent 1px),
-        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-      background-size: 32px 32px;
-      color: var(--text);
-      font-family: "Inter", system-ui, sans-serif;
-      line-height: 1.6;
-    }
-    a { color: var(--accent); text-decoration: none; }
-    code, pre {
-      font-family: "JetBrains Mono", ui-monospace, monospace;
-      font-size: 0.88em;
-    }
-    code {
-      background: var(--surface-2);
-      padding: 0.1em 0.4em;
-      border-radius: 6px;
-    }
-    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
-
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      padding: 14px 0;
-    }
-    .topbar .wrap { display: flex; justify-content: center; position: relative; }
-    .pill-nav {
-      display: flex;
-      gap: 4px;
-      padding: 6px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      box-shadow: var(--shadow);
-      overflow-x: auto;
-      max-width: calc(100% - 56px);
-    }
-    .pill-nav a {
-      padding: 8px 16px;
-      border-radius: 999px;
-      color: var(--muted);
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-    .pill-nav a:hover { background: var(--surface-2); color: var(--text); }
-    .pill-nav a.gh { border: 1px solid var(--accent); color: var(--accent); }
-    .theme-btn {
-      position: absolute;
-      right: 16px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--text);
-      cursor: pointer;
-      display: grid;
-      place-items: center;
-    }
-
-    .hero {
-      display: grid;
-      grid-template-columns: 1.1fr 1fr;
-      gap: 48px;
-      align-items: center;
-      padding: 72px 0 96px;
-    }
-    .eyebrow {
-      margin: 0 0 12px;
-      color: var(--accent);
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-    }
-    .hero h1 {
-      margin: 0 0 20px;
-      font-family: "Space Grotesk", sans-serif;
-      font-weight: 700;
-      font-size: clamp(2.6rem, 6vw, 4.6rem);
-      line-height: 1.02;
-      letter-spacing: -0.02em;
-    }
-    .hero h1 span { color: var(--accent); }
-    .hero .sub {
-      margin: 0 0 32px;
-      max-width: 34ch;
-      color: var(--muted);
-      font-size: 1.15rem;
-    }
-    .btns { display: flex; flex-wrap: wrap; gap: 12px; }
-    .btn {
-      padding: 13px 24px;
-      border-radius: 12px;
-      font-weight: 600;
-      border: 1.5px solid var(--accent);
-    }
-    .btn.primary { background: var(--accent); color: var(--accent-ink); }
-    .btn.ghost { color: var(--accent); background: var(--surface); }
-
-    .panel {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 24px;
-      box-shadow: var(--shadow);
-    }
-    .plot {
-      background: var(--surface-2);
-      border-radius: 16px;
-      overflow: hidden;
-    }
-    .plot svg { display: block; width: 100%; height: auto; }
-    .legend {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      margin: 12px 0 20px;
-      color: var(--muted);
-      font-size: 0.82rem;
-    }
-    .legend i {
-      display: inline-block;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      margin-right: 6px;
-      vertical-align: middle;
-    }
-    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-    .stat {
-      text-align: center;
-      padding: 12px 6px;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-    }
-    .stat b {
-      display: block;
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 1.6rem;
-      line-height: 1.2;
-    }
-    .stat span {
-      display: block;
-      line-height: 1.3;
-      color: var(--muted);
-      font-size: 0.7rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    section { padding: 64px 0; }
-    .section-head { margin-bottom: 28px; }
-    .section-head h2 {
-      margin: 0 0 6px;
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 2rem;
-      letter-spacing: -0.01em;
-    }
-    .section-head p { margin: 0; color: var(--muted); }
-    .fn {
-      display: inline-block;
-      margin-top: 14px;
-      padding: 8px 14px;
-      border-radius: 999px;
-      background: var(--accent-soft);
-      font-size: 0.92rem;
-    }
-    .fn code { background: none; padding: 0; }
-
-    .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; }
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 20px;
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
-    }
-    .card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
-    .card .num {
-      color: var(--accent);
-      font-family: "JetBrains Mono", monospace;
-      font-size: 0.8rem;
-    }
-    .card h3 { margin: 6px 0 4px; font-family: "Space Grotesk", sans-serif; font-size: 1.15rem; }
-    .card .tag { margin: 0 0 10px; font-size: 0.85rem; }
-    .card p { margin: 0; color: var(--muted); font-size: 0.93rem; }
-    .file-link { display: inline-block; margin-top: 20px; font-weight: 600; }
-
-    .notes { padding: 28px; }
-    .notes h3 { margin: 0 0 12px; font-family: "Space Grotesk", sans-serif; }
-    .notes ul { margin: 0; padding-left: 20px; }
-    .notes li { margin-bottom: 12px; }
-    .notes li::marker { color: var(--accent); }
-
-    pre {
-      margin: 0 0 16px;
-      padding: 20px;
-      background: var(--surface-2);
-      border-radius: 14px;
-      overflow-x: auto;
-    }
-    pre code { background: none; padding: 0; }
-    .run p { margin: 0; color: var(--muted); }
-
-    footer { padding: 32px 0 56px; color: var(--muted); font-size: 0.9rem; text-align: center; }
-
-    .hero > * { min-width: 0; }
-
-    @media (max-width: 860px) {
-      .hero { grid-template-columns: minmax(0, 1fr); padding: 40px 0 56px; gap: 36px; }
-      .topbar .wrap { justify-content: flex-start; }
-    }
-    @media (max-width: 480px) {
-      .hero h1 { font-size: 2.3rem; }
-      .pill-nav a { padding: 8px 12px; }
-      .panel { padding: 16px; }
-      .stat b { font-size: 1.3rem; }
-      .stat span { font-size: 0.62rem; letter-spacing: 0.04em; }
-    }
-  </style>
 </head>
 <body>
   <div class="topbar">
     <div class="wrap">
       <nav class="pill-nav">
-        <a href="#top">Home</a>
-        <a href="#one-d">1-D</a>
-        <a href="#two-d">2-D</a>
-        <a href="#notes">Notes</a>
-        <a href="#running">Run</a>
-        <a class="gh" href="https://github.com/zlouvat/Optimizations-Portfolio">GitHub</a>
+        <a class="active" href="">Home</a>
+        <a href="#projects">Projects</a>
+        <a href="optimizations/">Optimizations</a>
+        <a class="gh" href="https://github.com/zlouvat">GitHub</a>
       </nav>
       <button class="theme-btn" id="theme-btn" aria-label="Toggle dark mode">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -316,180 +34,85 @@
   <main class="wrap" id="top">
     <div class="hero">
       <div>
-        <p class="eyebrow">DCS340 Portfolio</p>
-        <h1>Classic <span>Optimization</span> Methods</h1>
-        <p class="sub">Building each method from scratch and watching how it finds the top of a curve or the bottom of a surface.</p>
+        <p class="eyebrow">Portfolio</p>
+        <h1>Hi, I'm <span>Zack</span>.</h1>
+        <p class="sub">I'm a student at Bates College studying Digital &amp; Computational Studies. This is where I keep my projects.</p>
         <div class="btns">
-          <a class="btn primary" href="#one-d">Explore Methods</a>
-          <a class="btn ghost" href="https://github.com/zlouvat/Optimizations-Portfolio">View on GitHub</a>
+          <a class="btn primary" href="#projects">See Projects</a>
+          <a class="btn ghost" href="https://github.com/zlouvat">GitHub Profile</a>
         </div>
       </div>
 
       <div class="panel">
-        <div class="plot">
-          <svg viewBox="0 0 300 300" role="img" aria-label="Contour plot of f(x, y) = (x - 2)^2 - xy + (y - 3)^2 with gradient descent and Newton paths from (0, 0) to the minimum">
-            <g fill="none" stroke="var(--contour)" stroke-width="1.2" transform="rotate(-45 160 138.2)">
-              <ellipse cx="160" cy="138.2" rx="27.3" ry="15.7"/>
-              <ellipse cx="160" cy="138.2" rx="54.5" ry="31.5"/>
-              <ellipse cx="160" cy="138.2" rx="86.2" ry="49.8"/>
-              <ellipse cx="160" cy="138.2" rx="115.7" ry="66.8"/>
-              <ellipse cx="160" cy="138.2" rx="144.3" ry="83.3"/>
-              <ellipse cx="160" cy="138.2" rx="194.1" ry="112.1"/>
-            </g>
-            <line x1="32.7" y1="283.6" x2="160" y2="138.2" stroke="var(--accent)" stroke-width="2" stroke-dasharray="5 5"/>
-            <polyline fill="none" stroke="var(--path)" stroke-width="2.2" stroke-linejoin="round"
-              points="32.7,283.6 87.3,201.8 128.2,174.5 141.8,154.1 152.0,147.3 155.5,142.2 158.0,140.5 158.9,139.2 159.5,138.8 160,138.2"/>
-            <g fill="var(--path)">
-              <circle cx="87.3" cy="201.8" r="3.2"/>
-              <circle cx="128.2" cy="174.5" r="3.2"/>
-              <circle cx="141.8" cy="154.1" r="3.2"/>
-              <circle cx="152.0" cy="147.3" r="3.2"/>
-              <circle cx="155.5" cy="142.2" r="3.2"/>
-            </g>
-            <circle cx="32.7" cy="283.6" r="4.5" fill="var(--text)"/>
-            <circle cx="160" cy="138.2" r="6" fill="var(--surface)" stroke="var(--accent)" stroke-width="2.5"/>
-            <text x="42" y="287" font-family="JetBrains Mono, monospace" font-size="10" fill="var(--muted)">start (0, 0)</text>
-            <text x="172" y="128" font-family="JetBrains Mono, monospace" font-size="10" fill="var(--muted)">min (4.67, 5.33)</text>
-          </svg>
-        </div>
-        <div class="legend">
-          <span><i style="background: var(--path)"></i>Gradient descent, α = 0.5</span>
-          <span><i style="background: var(--accent)"></i>Newton's method, 1 step</span>
-        </div>
-        <div class="stats">
-          <div class="stat"><b>9</b><span>Methods</span></div>
-          <div class="stat"><b>2</b><span>Dimensions</span></div>
-          <div class="stat"><b>5</b><span>Test functions</span></div>
-        </div>
+        <ul class="now">
+          <li>
+            <span class="label">School</span>
+            <span class="value">Bates College</span>
+          </li>
+          <li>
+            <span class="label">Studying</span>
+            <span class="value">Digital &amp; Computational Studies</span>
+          </li>
+          <li>
+            <span class="label">Currently</span>
+            <span class="value">DCS340 · Classical Methods in Optimization</span>
+          </li>
+          <li>
+            <span class="label">Tools</span>
+            <span class="value">Python · NumPy · SciPy · Matplotlib · Git</span>
+          </li>
+        </ul>
       </div>
     </div>
 
-    <section id="one-d">
+    <section id="projects">
       <div class="section-head">
-        <h2>1-D Methods</h2>
-        <p>Finding the maximum of a single-variable function.</p>
-        <div class="fn">f(x) = <code>4 − (x − 2)²</code> · max at <code>x = 2</code></div>
+        <h2>Projects</h2>
+        <p>Coursework, experiments, and things I've built.</p>
       </div>
-      <div class="cards">
-        <div class="card">
-          <span class="num">01</span>
-          <h3>Guess &amp; Check</h3>
-          <p class="tag"><code>Guess_And_Check()</code></p>
-          <p>Evaluate f on a coarse grid and pick the largest value.</p>
-        </div>
-        <div class="card">
-          <span class="num">02</span>
-          <h3>Plotting</h3>
-          <p class="tag"><code>Plotting()</code></p>
-          <p>Plot f on [0, 4] to see the peak before searching for it.</p>
-        </div>
-        <div class="card">
-          <span class="num">03</span>
-          <h3>Gradient Ascent</h3>
-          <p class="tag"><code>Gradient_opt()</code></p>
-          <p>Step uphill with <code>x ← x + α·f′(x)</code> using a fixed learning rate.</p>
-        </div>
-        <div class="card">
-          <span class="num">04</span>
-          <h3>Bisection</h3>
-          <p class="tag"><code>Bisection()</code></p>
-          <p>Halve a bracket around the root of <code>f′(x)</code> until it's within tolerance.</p>
-        </div>
-        <div class="card">
-          <span class="num">05</span>
-          <h3>Newton's Method</h3>
-          <p class="tag"><code>newtons_optimization()</code></p>
-          <p><code>xₙ₊₁ = xₙ − f′(xₙ) / f″(xₙ)</code>, tested on cubic, quartic, damped-wave, rational, and log functions.</p>
-        </div>
-      </div>
-      <a class="file-link" href="https://github.com/zlouvat/Optimizations-Portfolio/blob/main/classic_optimization.py">View classic_optimization.py →</a>
-    </section>
-
-    <section id="two-d">
-      <div class="section-head">
-        <h2>2-D Methods</h2>
-        <p>Finding the minimum of a two-variable surface.</p>
-        <div class="fn">f(x, y) = <code>(x − 2)² − xy + (y − 3)²</code> · min at <code>(14/3, 16/3)</code></div>
-      </div>
-      <div class="cards">
-        <div class="card">
-          <span class="num">01</span>
-          <h3>Surface Visualization</h3>
-          <p class="tag"><code>vizualization()</code></p>
-          <p>3-D surface plot of f to see the bowl shape.</p>
-        </div>
-        <div class="card">
-          <span class="num">02</span>
-          <h3>Nelder-Mead</h3>
-          <p class="tag"><code>Bisection_Nelder_Mead()</code></p>
-          <p>SciPy's derivative-free simplex search, used as a baseline.</p>
-        </div>
-        <div class="card">
-          <span class="num">03</span>
-          <h3>Gradient Descent</h3>
-          <p class="tag"><code>Gradient_2D()</code></p>
-          <p>Step downhill with <code>v ← v − α·∇f(v)</code>.</p>
-        </div>
-        <div class="card">
-          <span class="num">04</span>
-          <h3>Newton's Method</h3>
-          <p class="tag"><code>Newtons_2D()</code></p>
-          <p>Solve <code>HΔ = ∇f</code> each step, which is exact in one step for a quadratic.</p>
-        </div>
-      </div>
-      <a class="file-link" href="https://github.com/zlouvat/Optimizations-Portfolio/blob/main/2D-Optimizations.py">View 2D-Optimizations.py →</a>
-    </section>
-
-    <section id="notes">
-      <div class="section-head">
-        <h2>Takehome Notes</h2>
-        <p>Reflections after each play session.</p>
-      </div>
-      <div class="panel notes">
-        <h3>Gradient</h3>
-        <ul>
-          <li>Extremely sensitive to the learning rate, this is interesting after having tried many different equations as I'm unsure why you wouldn't just increase the learning rate to reach the optimum point earlier. I was unable to find an equation that increasing the learning rate had falsified the outcome or reduced the meaning of the outcome.
-            <ul>
-              <li>After further looking into equations, this learning rate, when too large, can jump completely over the maximum which can impact the final product, seeming like it's unfinished at certain points.</li>
-            </ul>
-          </li>
-          <li>I can see why the gradient method is using a lot in machine learning, it's one of the simplest and it's efficient at what it does. I wonder how different algorithms, like newtons, and bisection would do in a machine learning space. I'd imagine there are different applications for each of them, some may excel in areas better than others.</li>
-        </ul>
-      </div>
-    </section>
-
-    <section id="running">
-      <div class="section-head">
-        <h2>Running the Code</h2>
-        <p>Python 3 with NumPy, Matplotlib, and SciPy.</p>
-      </div>
-      <div class="panel run">
-        <pre><code>git clone https://github.com/zlouvat/Optimizations-Portfolio.git
-cd Optimizations-Portfolio
-pip install numpy matplotlib scipy
-
-python classic_optimization.py
-python 2D-Optimizations.py</code></pre>
-        <p>Each script runs one method by default. To try a different one, uncomment its call in the <code>if __name__ == "__main__":</code> block at the bottom of the file.</p>
+      <div class="projects">
+        <a class="project" href="optimizations/">
+          <div class="thumb">
+            <svg viewBox="0 0 320 160" aria-hidden="true">
+              <g fill="none" stroke="var(--contour)" stroke-width="1.2" transform="rotate(-35 190 70)">
+                <ellipse cx="190" cy="70" rx="22" ry="12"/>
+                <ellipse cx="190" cy="70" rx="48" ry="26"/>
+                <ellipse cx="190" cy="70" rx="78" ry="42"/>
+                <ellipse cx="190" cy="70" rx="112" ry="60"/>
+                <ellipse cx="190" cy="70" rx="150" ry="80"/>
+              </g>
+              <polyline fill="none" stroke="var(--path)" stroke-width="2.2" stroke-linejoin="round" points="60,140 118,100 152,90 170,78 182,74 190,70"/>
+              <g fill="var(--path)">
+                <circle cx="118" cy="100" r="3"/>
+                <circle cx="152" cy="90" r="3"/>
+                <circle cx="170" cy="78" r="3"/>
+              </g>
+              <circle cx="60" cy="140" r="4" fill="var(--text)"/>
+              <circle cx="190" cy="70" r="5.5" fill="var(--surface)" stroke="var(--accent)" stroke-width="2.5"/>
+            </svg>
+          </div>
+          <div class="body">
+            <h3>Classic Optimization Methods</h3>
+            <p>Gradient descent, bisection, Newton's method, and Nelder-Mead, built from scratch and compared in 1-D and 2-D.</p>
+            <div class="chips">
+              <span class="chip">DCS340</span>
+              <span class="chip">Python</span>
+              <span class="chip">NumPy</span>
+              <span class="chip">SciPy</span>
+            </div>
+            <span class="go">View project →</span>
+          </div>
+        </a>
       </div>
     </section>
   </main>
 
   <footer>
     <div class="wrap">
-      DCS340 · Introduction to Classical Methods in Optimization · <a href="https://github.com/zlouvat">@zlouvat</a>
+      © 2026 · <a href="https://github.com/zlouvat">@zlouvat</a>
     </div>
   </footer>
 
-  <script>
-    document.getElementById("theme-btn").addEventListener("click", function () {
-      var root = document.documentElement;
-      var current = root.getAttribute("data-theme") ||
-        (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-      var next = current === "dark" ? "light" : "dark";
-      root.setAttribute("data-theme", next);
-      try { localStorage.setItem("theme", next); } catch (e) {}
-    });
-  </script>
+  <script src="theme.js"></script>
 </body>
 </html>
