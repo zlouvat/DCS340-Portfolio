@@ -336,3 +336,4 @@ footer { padding: 32px 0 56px; color: var(--muted); font-size: 0.9rem; text-alig
 @media (max-width: 480px) {
   .projects { grid-template-columns: minmax(0, 1fr); }
 }
+.notes + .notes { margin-top: 20px; }
