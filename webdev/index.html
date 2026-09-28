@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Development</title>
+    <meta
+      name="description"
+      content="Web development projects from DCS325, from hand-written HTML to React apps with a Firebase backend."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../style.css" />
+    <script>
+      try {
+        var saved = localStorage.getItem("theme");
+        if (saved) document.documentElement.setAttribute("data-theme", saved);
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="wrap">
+        <nav class="pill-nav">
+          <a href="../index.html">Home</a>
+          <a href="../index.html#projects">Projects</a>
+          <a href="../optimizations/index.html">Optimizations</a>
+          <a class="active" href="index.html">Web Dev</a>
+          <a class="gh" href="https://github.com/zlouvat">GitHub</a>
+        </nav>
+        <button class="theme-btn" id="theme-btn" aria-label="Toggle dark mode">
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <main class="wrap" id="top">
+      <div class="hero">
+        <div>
+          <p class="eyebrow">DCS325 Portfolio</p>
+          <h1><span>Web</span> Development</h1>
+          <p class="sub">
+            A semester of building for the web, from hand-written HTML and CSS
+            to React apps with a real backend.
+          </p>
+          <div class="btns">
+            <a class="btn primary" href="#featured">Explore Projects</a>
+            <a
+              class="btn ghost"
+              href="https://github.com/zlouvat/Web-Development-Portfolio"
+              >View on GitHub</a
+            >
+          </div>
+          <nav class="subnav">
+            <a href="#featured">Featured</a>
+            <a href="#more">All Projects</a>
+            <a href="#notes">Notes</a>
+            <a href="#toolkit">Toolkit</a>
+          </nav>
+        </div>
+
+        <div class="panel">
+          <div class="browser">
+            <div class="browser-bar">
+              <i></i><i></i><i></i>
+              <span>Digital &amp; Computational Studies</span>
+            </div>
+            <img
+              src="images/dcs-site.jpg"
+              alt="Redesigned Bates Digital and Computational Studies major page"
+              width="960"
+              height="600"
+            />
+          </div>
+          <div class="stats">
+            <div class="stat"><b>11</b><span>Projects</span></div>
+            <div class="stat"><b>6</b><span>React apps</span></div>
+            <div class="stat"><b>13</b><span>Topics</span></div>
+          </div>
+        </div>
+      </div>
+
+      <section id="featured">
+        <div class="section-head">
+          <h2>Featured</h2>
+          <p>The projects I'm proudest of, with screenshots.</p>
+        </div>
+        <div class="projects featured">
+          <a
+            class="project"
+            href="https://github.com/zlouvat/Web-Development-Portfolio/tree/main/Accessibility%20%26%20Krug"
+          >
+            <div class="thumb">
+              <img
+                src="images/dcs-site.jpg"
+                alt="DCS major page with a maroon hero and campus photo"
+                loading="lazy"
+                width="960"
+                height="600"
+              />
+            </div>
+            <div class="body">
+              <h3>DCS Major Site</h3>
+              <p>
+                A redesign of the Bates Digital &amp; Computational Studies
+                major page. Every button and menu can be reached with the Tab
+                key, and the layout follows Krug's usability ideas: clear
+                headings, obvious buttons, simple navigation and minimal text.
+              </p>
+              <div class="chips">
+                <span class="chip">React</span>
+                <span class="chip">Tailwind</span>
+                <span class="chip">Accessibility</span>
+                <span class="chip">Krug</span>
+              </div>
+              <span class="go">View code →</span>
+            </div>
+          </a>
+
+          <a
+            class="project"
+            href="https://github.com/zlouvat/Web-Development-Portfolio/tree/main/HTML%2BCSS"
+          >
+            <div class="thumb">
+              <img
+                src="images/news-center.jpg"
+                alt="News Center page linking to CNN, Fox and ABC"
+                loading="lazy"
+                width="960"
+                height="600"
+              />
+            </div>
+            <div class="body">
+              <h3>News Center</h3>
+              <p>
+                A hand-built news hub with pages for CNN, Fox and ABC. Each
+                page pulls the network's latest headlines from its RSS feed
+                with JavaScript, so the stories update on their own.
+              </p>
+              <div class="chips">
+                <span class="chip">HTML</span>
+                <span class="chip">CSS</span>
+                <span class="chip">JavaScript</span>
+                <span class="chip">RSS</span>
+              </div>
+              <span class="go">View code →</span>
+            </div>
+          </a>
+
+          <a
+            class="project"
+            href="https://github.com/zlouvat/Web-Development-Portfolio/tree/main/React"
+          >
+            <div class="thumb">
+              <img
+                src="images/react-info.jpg"
+                alt="Welcome page with an aerial photo of Bates campus"
+                loading="lazy"
+                width="960"
+                height="600"
+              />
+            </div>
+            <div class="body">
+              <h3>Web Development Info Site</h3>
+              <p>
+                An informational site about HTML, CSS, JavaScript and GitHub,
+                built from reusable React components (NavBar,
+                LandingPageContent, PageBorder and InfoCard) with
+                React-Bootstrap.
+              </p>
+              <div class="chips">
+                <span class="chip">React</span>
+                <span class="chip">Vite</span>
+                <span class="chip">React-Bootstrap</span>
+              </div>
+              <span class="go">View code →</span>
+            </div>
+          </a>
+
+          <a
+            class="project"
+            href="https://github.com/zlouvat/Web-Development-Portfolio/tree/main/TailwindCSS"
+          >
+            <div class="thumb">
+              <img
+                src="images/tailwind-bullseye.jpg"
+                alt="Green and red bullseye on a soft gradient background"
+                loading="lazy"
+                width="960"
+                height="600"
+              />
+            </div>
+            <div class="body">
+              <h3>Tailwind Bullseye</h3>
+              <p>
+                A bullseye on a gradient background, styled entirely with
+                Tailwind's built-in utility classes and no custom CSS.
+              </p>
+              <div class="chips">
+                <span class="chip">Tailwind CSS</span>
+                <span class="chip">HTML</span>
+              </div>
+              <span class="go">View code →</span>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <section id="more">
+        <div class="section-head">
+          <h2>All Projects</h2>
+          <p>Everything else from the course, in the order I built it.</p>
+        </div>
+        <div class="cards">
+          <div class="card">
+            <span class="num">01</span>
+            <h3>Course Elements</h3>
+            <p class="tag"><code>JavaScript</code></p>
+            <p>
+              Five menu buttons, each with a click listener that animates an
+              information box into view.
+            </p>
+            <a
+              class="card-link"
+              href="https://github.com/zlouvat/Web-Development-Portfolio/tree/main/JavaScript"
+              >View code →</a
+            >
+          </div>
+          <div class="card">
+            <span class="num">02</span>
+            <h3>SSH &amp; SCP Guide</h3>
+            <p class="tag"><code>ssh</code> <code>scp</code> <code>tar</code></p>
+            <p>
+              A step-by-step guide to creating SSH keys, logging in without a
+              password, and deploying a website to Bates's Catapult server.
+            </p>
+            <a
+              class="card-link"
+              href="https://github.com/zlouvat/Web-Development-Portfolio/tree/main/SSH%2BSCP/SSH"
+              >Read the guide →</a
+            >
+          </div>
+          <div class="card">
+            <span class="num">03</span>
+            <h3>Bootstrap Components</h3>
+            <p class="tag"><code>Bootstrap</code> <code>React</code></p>
+            <p>
+              A Bates-branded navbar and a carousel you can move through with
+              the keyboard, built from Bootstrap components.
+            </p>
+            <a
+              class="card-link"
+              href="https://github.com/zlouvat/Web-Development-Portfolio/tree/main/Bootstrap"
+              >View code →</a
+            >
+          </div>
+          <div class="card">
+            <span class="num">04</span>
+            <h3>ShadCN Dashboard</h3>
+            <p class="tag"><code>ShadCN/UI</code> <code>Tailwind</code></p>
+            <p>
+              A dashboard with a collapsible sidebar, customized with new
+              lucide-react icons and an added Binary section.
+            </p>
+            <a
+              class="card-link"
+              href="https://github.com/zlouvat/Web-Development-Portfolio/tree/main/ShadCN"
+              >View code →</a
+            >
+          </div>
+          <div class="card">
+            <span class="num">05</span>
+            <h3>DCS Project Showcase</h3>
+            <p class="tag"><code>Figma</code></p>
+            <p>
+              A clickable prototype for showcasing DCS student projects,
+              designed in Figma without writing any code.
+            </p>
+            <a
+              class="card-link"
+              href="https://www.figma.com/proto/gilkQxqSOtRE4Pvy5d41iZ/DCS-Project-Showcase?node-id=2038-321&t=Hl03Z7ocO0qgRScV-1"
+              >Open prototype →</a
+            >
+          </div>
+          <div class="card">
+            <span class="num">06</span>
+            <h3>Game Center</h3>
+            <p class="tag"><code>Cursor</code> <code>React</code></p>
+            <p>
+              Chess and Tic-Tac-Toe against a computer opponent, built with
+              Cursor and Claude 3.7 Sonnet using React, ShadCN and Tailwind 4.
+            </p>
+            <a
+              class="card-link"
+              href="https://github.com/zlouvat/Web-Development-Portfolio/tree/main/Cursor"
+              >View code →</a
+            >
+          </div>
+          <div class="card">
+            <span class="num">07</span>
+            <h3>Firebase Sign-In</h3>
+            <p class="tag"><code>Firebase</code> <code>React</code></p>
+            <p>
+              Sign up, log in, password reset and a protected dashboard, with
+              Firebase Authentication storing accounts in the cloud.
+            </p>
+            <a
+              class="card-link"
+              href="https://github.com/zlouvat/Web-Development-Portfolio/tree/main/Firebase"
+              >View code →</a
+            >
+          </div>
+        </div>
+      </section>
+
+      <section id="notes">
+        <div class="section-head">
+          <h2>Notes</h2>
+          <p>What I wrote about these projects along the way.</p>
+        </div>
+        <div class="quotes">
+          <figure class="quote">
+            <blockquote>
+              Though it is significantly more basic than anything in react, I
+              think this is one of my more proud projects of the semester
+              because it was entirely handmade.
+            </blockquote>
+            <figcaption>News Center</figcaption>
+          </figure>
+          <figure class="quote">
+            <blockquote>
+              This is one of the cooler websites in the portfolio, just because
+              it actually has a backend
+            </blockquote>
+            <figcaption>Firebase Sign-In</figcaption>
+          </figure>
+          <figure class="quote">
+            <blockquote>
+              One great feature of figma, with great help from AI, is that you
+              can take a figma and hand it off to Cursor, AI coding
+              environment, to easily implement it's interpretation of the
+              project you gave it.
+            </blockquote>
+            <figcaption>DCS Project Showcase</figcaption>
+          </figure>
+          <figure class="quote">
+            <blockquote>
+              I personally messed around with the way the left navigational bar
+              worked, also known as a dropdown menu, and changed a few of the
+              icons along with adding the Binary section.
+            </blockquote>
+            <figcaption>ShadCN Dashboard</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section id="toolkit">
+        <div class="section-head">
+          <h2>Toolkit</h2>
+          <p>Everything this course covered.</p>
+        </div>
+        <div class="tool-groups">
+          <div class="panel tool-group">
+            <h3>Foundations</h3>
+            <div class="chips">
+              <span class="chip">HTML</span>
+              <span class="chip">CSS</span>
+              <span class="chip">JavaScript</span>
+            </div>
+          </div>
+          <div class="panel tool-group">
+            <h3>Frameworks</h3>
+            <div class="chips">
+              <span class="chip">React</span>
+              <span class="chip">Vite</span>
+              <span class="chip">Bootstrap</span>
+              <span class="chip">Tailwind CSS</span>
+              <span class="chip">ShadCN/UI</span>
+            </div>
+          </div>
+          <div class="panel tool-group">
+            <h3>Backend &amp; Deploy</h3>
+            <div class="chips">
+              <span class="chip">Firebase</span>
+              <span class="chip">SSH</span>
+              <span class="chip">SCP</span>
+            </div>
+          </div>
+          <div class="panel tool-group">
+            <h3>Design &amp; AI</h3>
+            <div class="chips">
+              <span class="chip">Figma</span>
+              <span class="chip">Krug</span>
+              <span class="chip">Accessibility</span>
+              <span class="chip">Cursor</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        DCS325 · Web Development ·
+        <a href="https://github.com/zlouvat/Web-Development-Portfolio"
+          >Source on GitHub</a
+        >
+      </div>
+    </footer>
+
+    <script src="../theme.js"></script>
+  </body>
+</html>
