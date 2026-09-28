@@ -243,23 +243,24 @@ def newtons_optimization():
 if __name__ == "__main__":
     # Guess_And_Check()
     # Plotting()
-    # Gradient_opt()
+    Gradient_opt()
     # Bisection()
-    newtons_optimization()
+    # newtons_optimization()
 
 
-##################################################################################################
-#    TAKEHOME NOTES AFTER PLAY SESSION                                                           #
-##################################################################################################
+# ==============================================================================
+# TAKEHOME NOTES AFTER PLAY SESSION
+# ==============================================================================
 
 """
-    * Gradient 
+    * Gradient
         - Extremely sensitive to the learning rate, this is interesting after having tried many
         different equations as I'm unsure why you wouldn't just increase the learning rate to reach
         the optimum point earlier. I was unable to find an equation that increasing the learning
         rate had falsified the outcome or reduced the meaning of the outcome.
-            = After further looking into equations, this learning rate, when too large, can jump completely 
+            = After further looking into equations, this learning rate, when too large, can jump completely
             over the maximum which can impact the final product, seeming like it's unfinished at certain points.
-        - I can see why the gradient method is using a lot in machine learning, it's one of the simplest and it's efficient 
-        at what it does. I wonder how different algorithms, like newtons, and bisection would do in a machine learning space. 
+        - I can see why the gradient method is using a lot in machine learning, it's one of the simplest and it's efficient
+        at what it does. I wonder how different algorithms, like newtons, and bisection would do in a machine learning space.
         I'd imagine there are different applications for each of them, some may excel in areas better than others.
+"""

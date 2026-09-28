@@ -28,7 +28,6 @@ import numpy as np
 from scipy.optimize import minimize
 
 
-
 def vizualization():
     """Plot the toy quadratic surface z = f(x, y) over a 2-D grid.
 
@@ -119,7 +118,7 @@ def Gradient_2D():
         return np.array([dx, dy])
 
     # Parameters
-    v = np.array([0.0, 0.0]) # Initial guess
+    v = np.array([0.0, 0.0])  # Initial guess
     alpha = 0.5              # Learning rate
     epochs = 20              # Iterations
 

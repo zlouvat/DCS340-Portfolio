@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DCS340 Portfolio</title>
+  <meta name="description" content="Classic optimization methods explored in 1-D and 2-D.">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --surface: #f6f8fa;
+      --text: #1f2328;
+      --muted: #59636e;
+      --border: #d1d9e0;
+      --accent: #0969da;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0d1117;
+        --surface: #151b23;
+        --text: #e6edf3;
+        --muted: #9198a1;
+        --border: #3d444d;
+        --accent: #4493f8;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.9em;
+      background: var(--surface);
+      padding: 0.1em 0.35em;
+      border-radius: 4px;
+    }
+    .wrap { max-width: 860px; margin: 0 auto; padding: 0 16px; }
+    header { border-bottom: 1px solid var(--border); padding: 56px 0 32px; }
+    header h1 { margin: 0 0 8px; font-size: 2rem; }
+    header p { margin: 0; color: var(--muted); }
+    nav { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 20px; font-size: 0.95rem; }
+    section { padding: 40px 0; border-bottom: 1px solid var(--border); }
+    section:last-of-type { border-bottom: none; }
+    h2 { margin: 0 0 8px; font-size: 1.4rem; }
+    .lead { color: var(--muted); margin: 0 0 24px; }
+    .fn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 24px;
+      font-size: 0.95rem;
+    }
+    .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+    .card { border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
+    .card h3 { margin: 0 0 4px; font-size: 1rem; }
+    .card .tag { color: var(--muted); font-size: 0.85rem; margin: 0 0 8px; }
+    .card p { margin: 0; font-size: 0.93rem; }
+    .file-link { display: inline-block; margin-top: 20px; font-weight: 600; }
+    .notes { border-left: 3px solid var(--border); padding-left: 16px; }
+    .notes h3 { margin: 0 0 8px; font-size: 1rem; }
+    .notes ul { margin: 0; padding-left: 20px; }
+    .notes li { margin-bottom: 10px; }
+    pre {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      overflow-x: auto;
+      font-size: 0.9rem;
+    }
+    pre code { background: none; padding: 0; }
+    footer { border-top: 1px solid var(--border); padding: 24px 0 48px; color: var(--muted); font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>DCS340 Portfolio</h1>
+      <p>Classic optimization methods, built from scratch and run on small toy functions so each method's behavior is easy to see.</p>
+      <nav>
+        <a href="#one-d">1-D Methods</a>
+        <a href="#two-d">2-D Methods</a>
+        <a href="#notes">Takehome Notes</a>
+        <a href="#running">Running the Code</a>
+        <a href="https://github.com/zlouvat/DCS340-Portfolio">GitHub Repo</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section id="one-d">
+      <h2>1-D Methods</h2>
+      <p class="lead">Finding the maximum of a single-variable function.</p>
+      <div class="fn">Toy function: <code>f(x) = 4 − (x − 2)²</code> &nbsp;·&nbsp; maximum at <code>x = 2</code></div>
+      <div class="cards">
+        <div class="card">
+          <h3>Guess &amp; Check</h3>
+          <p class="tag"><code>Guess_And_Check()</code></p>
+          <p>Evaluate f on a coarse grid and pick the largest value.</p>
+        </div>
+        <div class="card">
+          <h3>Plotting</h3>
+          <p class="tag"><code>Plotting()</code></p>
+          <p>Plot f on [0, 4] to see the peak before searching for it.</p>
+        </div>
+        <div class="card">
+          <h3>Gradient Ascent</h3>
+          <p class="tag"><code>Gradient_opt()</code></p>
+          <p>Step uphill with <code>x ← x + α·f′(x)</code> using a fixed learning rate.</p>
+        </div>
+        <div class="card">
+          <h3>Bisection</h3>
+          <p class="tag"><code>Bisection()</code></p>
+          <p>Halve a bracket around the root of <code>f′(x)</code> until it's within tolerance.</p>
+        </div>
+        <div class="card">
+          <h3>Newton's Method</h3>
+          <p class="tag"><code>newtons_optimization()</code></p>
+          <p><code>xₙ₊₁ = xₙ − f′(xₙ) / f″(xₙ)</code>, tested on cubic, quartic, damped-wave, rational, and log functions.</p>
+        </div>
+      </div>
+      <a class="file-link" href="https://github.com/zlouvat/DCS340-Portfolio/blob/main/classic_optimization.py">View classic_optimization.py →</a>
+    </section>
+
+    <section id="two-d">
+      <h2>2-D Methods</h2>
+      <p class="lead">Finding the minimum of a two-variable surface.</p>
+      <div class="fn">Toy function: <code>f(x, y) = (x − 2)² − xy + (y − 3)²</code> &nbsp;·&nbsp; minimum at <code>(14/3, 16/3) ≈ (4.667, 5.333)</code></div>
+      <div class="cards">
+        <div class="card">
+          <h3>Surface Visualization</h3>
+          <p class="tag"><code>vizualization()</code></p>
+          <p>3-D surface plot of f to see the bowl shape.</p>
+        </div>
+        <div class="card">
+          <h3>Nelder-Mead</h3>
+          <p class="tag"><code>Bisection_Nelder_Mead()</code></p>
+          <p>SciPy's derivative-free simplex search, used as a baseline.</p>
+        </div>
+        <div class="card">
+          <h3>Gradient Descent</h3>
+          <p class="tag"><code>Gradient_2D()</code></p>
+          <p>Step downhill with <code>v ← v − α·∇f(v)</code>.</p>
+        </div>
+        <div class="card">
+          <h3>Newton's Method</h3>
+          <p class="tag"><code>Newtons_2D()</code></p>
+          <p>Solve <code>HΔ = ∇f</code> each step, which is exact in one step for a quadratic.</p>
+        </div>
+      </div>
+      <a class="file-link" href="https://github.com/zlouvat/DCS340-Portfolio/blob/main/2D-Optimizations.py">View 2D-Optimizations.py →</a>
+    </section>
+
+    <section id="notes">
+      <h2>Takehome Notes</h2>
+      <p class="lead">Reflections after each play session.</p>
+      <div class="notes">
+        <h3>Gradient</h3>
+        <ul>
+          <li>Extremely sensitive to the learning rate, this is interesting after having tried many different equations as I'm unsure why you wouldn't just increase the learning rate to reach the optimum point earlier. I was unable to find an equation that increasing the learning rate had falsified the outcome or reduced the meaning of the outcome.
+            <ul>
+              <li>After further looking into equations, this learning rate, when too large, can jump completely over the maximum which can impact the final product, seeming like it's unfinished at certain points.</li>
+            </ul>
+          </li>
+          <li>I can see why the gradient method is using a lot in machine learning, it's one of the simplest and it's efficient at what it does. I wonder how different algorithms, like newtons, and bisection would do in a machine learning space. I'd imagine there are different applications for each of them, some may excel in areas better than others.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="running">
+      <h2>Running the Code</h2>
+      <pre><code>pip install numpy matplotlib scipy
+
+python classic_optimization.py
+python 2D-Optimizations.py</code></pre>
+      <p>Each script runs one method by default. To try a different one, uncomment its call in the <code>if __name__ == "__main__":</code> block at the bottom of the file.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      DCS340 · Introduction to Classical Methods in Optimization · <a href="https://github.com/zlouvat">@zlouvat</a>
+    </div>
+  </footer>
+</body>
+</html>
